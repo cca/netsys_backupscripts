@@ -17,7 +17,7 @@ do
 	    mkdir $CWD/daily/$HOSTNAME/$curDate
   fi
 
-	# dump each dabase in a separate file
+	# Dump each database in a separate file
 	mysqldump -u $DB_USER --password=$DB_PASS $db | gzip > $CWD/daily/$HOSTNAME/$curDate/$curDate-$db.sql.gz 2>$CWD/err
 	if [ "$?" -eq 0 ]
 	then
@@ -28,10 +28,10 @@ do
 	fi
 done
 
-#cleanup stuff
+# Cleanup files
 if [ -a /tmp/err ]; then
   rm /tmp/err
 fi
 
-#Delete file from a week ago
+# Delete file from a week ago
 rm -rf $CWD/daily/$HOSTNAME/$expDateFile
