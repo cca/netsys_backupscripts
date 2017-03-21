@@ -20,17 +20,17 @@ fi
 for i in $allDB; do
     /usr/bin/pg_dump -U postgres -Fp $i | gzip > $CWD/daily/$HOSTNAME/$curDate/$i.pg.gz 2>/tmp/err
     if [ "$?" -eq 0 ]; then
-	logger "pgsql-backup-all.sh: $i backed up successfully"
+	  logger "pgsql-backup-all.sh: $i backed up successfully"
     else
         /bin/cat /tmp/err | mail backupadmin@cca.edu -s "$HOSTNAME backup had an error"
 	      logger "pgsql-backup-all.sh: $i back up FAILED"
-  fi
+    fi
 done
 
 # Delete file from a week ago
 if [ -d $CWD/daily/$HOSTNAME/$expDateFile ]; then
 	logger "pgsql-backup-all.sh: removing $CWD/daily/$HOSTNAME/$expDateFile"
-        rm -rf $CWD/daily/$HOSTNAME/$expDateFile
+  rm -rf $CWD/daily/$HOSTNAME/$expDateFile
 fi
 
 # Cleanup files
