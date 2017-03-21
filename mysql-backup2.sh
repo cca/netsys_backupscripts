@@ -29,7 +29,9 @@ do
 done
 
 #cleanup stuff
-rm /tmp/err
+if [ -a /tmp/err ]; then
+  rm /tmp/err
+fi
 
 #Delete file from a week ago
 rm -rf $CWD/daily/$HOSTNAME/$expDateFile
