@@ -12,7 +12,11 @@ expDateFile=`date --date="5 days ago" "+%Y-%m-%d"`
 # Get the database list, exclude information_schema
 for db in $(mysql -B -s -u $DB_USER --password=$DB_PASS -e 'show databases' | grep -v information_schema)
 do
-	mkdir $CWD/daily/$HOSTNAME/$curDate
+
+  if [ ! -d $CWD/daily/$HOSTNAME/$curDate ]; then
+	    mkdir $CWD/daily/$HOSTNAME/$curDate
+  fi
+
 	# dump each dabase in a separate file
 	mysqldump -u $DB_USER --password=$DB_PASS $db | gzip > $CWD/daily/$HOSTNAME/$curDate/$curDate-$db.sql.gz 2>$CWD/err
 	if [ "$?" -eq 0 ]
