@@ -23,6 +23,7 @@ for i in $allDB; do
 	logger "pgsql-backup-all.sh: $i backed up successfully"
     else
         /bin/cat /tmp/err | mail backupadmin@cca.edu -s "$HOSTNAME backup had an error"
+	      logger "pgsql-backup-all.sh: $i back up FAILED"
   fi
 done
 
