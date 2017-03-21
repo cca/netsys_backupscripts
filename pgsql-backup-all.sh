@@ -20,7 +20,7 @@ fi
 for i in $allDB; do
     /usr/bin/pg_dump -U postgres -Fp $i | gzip > $CWD/daily/$HOSTNAME/$curDate/$i.pg.gz 2>/tmp/err
     if [ "$?" -eq 0 ]; then
-	  logger "pgsql-backup-all.sh: $i backed up successfully"
+	    logger "pgsql-backup-all.sh: $i backed up successfully"
     else
         /bin/cat /tmp/err | mail backupadmin@cca.edu -s "$HOSTNAME backup had an error"
 	      logger "pgsql-backup-all.sh: $i back up FAILED"
