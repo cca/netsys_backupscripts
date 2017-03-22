@@ -13,8 +13,8 @@ expDateFile=`date --date="last week" "+%Y-%m-%d"`
 allDB=`/usr/bin/psql -U postgres -d postgres -q -t -c 'SELECT datname from pg_database' | grep -v 'template0' | grep -v 'template1'`
 
 #create todays directory
-if [ ! -d $CWD/daily/$HOST/$curDate ]; then
-    mkdir $CWD/daily/$HOST/$curDate; 
+if [ ! -d $CWD/daily/$HOSTNAME/$curDate ]; then
+    mkdir $CWD/daily/$HOSTNAME/$curDate; 
 fi
 
 for i in $allDB; do
