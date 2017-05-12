@@ -10,7 +10,7 @@ curDate=`date "+%Y-%m-%d"`
 expDateFile=`date --date="5 days ago" "+%Y-%m-%d"`
 
 # Get the database list, exclude information_schema
-for db in $(mysql -B -s -u $DB_USER --password=$DB_PASS -e 'show databases' | grep -v information_schema); do
+for db in $(mysql -B -s -u $DB_USER --password=$DB_PASS -e 'show databases' | grep -v information_schema| grep -v performance_schema); do
   if [ ! -d $CWD/daily/$HOSTNAME/$curDate ]; then
 	    mkdir $CWD/daily/$HOSTNAME/$curDate
   fi
