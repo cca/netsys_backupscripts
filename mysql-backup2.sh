@@ -15,7 +15,7 @@ for db in $(mysql -B -s -u $DB_USER --password=$DB_PASS -e 'show databases' | gr
 	    mkdir $CWD/daily/$HOSTNAME/$curDate
   fi
 	# Dump each database in a separate file
-	mysqldump -u $DB_USER --password=$DB_PASS $db | gzip > $CWD/daily/$HOSTNAME/$curDate/$curDate-$db.sql.gz 2>$CWD/err
+	mysqldump -u $DB_USER --password=$DB_PASS --databases $db | gzip > $CWD/daily/$HOSTNAME/$curDate/$curDate-$db.sql.gz 2>$CWD/err
 	if [ "$?" -eq 0 ]
     then
         logger "mysql-backup2.sh: $db on $HOSTNAME backed up successfully"
